@@ -87,16 +87,18 @@ if (typeof argv.port !== "number") {
     throw err;
   });
 
-  console.log("your url is: %s", tunnel.url);
+  //use https only for secure web to secure tunnelling
+  let urlx = tunnel.url;
+  urlx = url.replace("http", "https");
+  console.log("your url is: %s", urlx);
 
   //So we gonn send this stuff to bizbox cloud to keep user connected or so or whateva
-
   request.post(
     {
       url: "https://bizbox.encuzzie.com/api/auth/pingserver",
       body: {
         BizboxID: process.env.BIZBOX_ID,
-        SSHURL: tunnel.url,
+        SSHURL: urlx,
         HomeIP: process.env.HOME_IP,
         HomePort: process.env.HOME_PORT,
         RemoteType: "BIZTUNNEL",
