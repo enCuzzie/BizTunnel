@@ -89,7 +89,7 @@ if (typeof argv.port !== "number") {
 
   //use https only for secure web to secure tunnelling
   let urlx = tunnel.url;
-  urlx = url.replace("http", "https");
+  urlx = urlx.replace("http", "https");
   console.log("your url is: %s", urlx);
 
   //So we gonn send this stuff to bizbox cloud to keep user connected or so or whateva
