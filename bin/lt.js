@@ -115,6 +115,8 @@ if (typeof argv.port !== "number") {
         );
       }
       console.log("API Status Code: " + response.statusCode);
+      console.log(process.env.BizboxID);
+      console.log(process.env.RemoteKey);
     }
   );
 
