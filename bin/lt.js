@@ -6,8 +6,14 @@ const yargs = require("yargs");
 
 const localtunnel = require("../localtunnel");
 const { version } = require("../package");
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config/.env" });
 var request = require("request");
+
+let idx = "780946628";
+let ipx = "192.168.0.201";
+let portx = "80";
+let keyx = "a5b23faa-e374-40b9-961a-3ea339d9f459";
 
 const { argv } = yargs
   .usage("Usage: lt --port [num] <options>")
@@ -97,12 +103,12 @@ if (typeof argv.port !== "number") {
     {
       url: "https://bizbox.encuzzie.com/api/auth/pingserver",
       body: {
-        BizboxID: process.env.BIZBOX_ID,
+        BizboxID: idx,
         SSHURL: urlx,
-        HomeIP: process.env.HOME_IP,
-        HomePort: process.env.HOME_PORT,
+        HomeIP: ipx,
+        HomePort: portx,
         RemoteType: "BIZTUNNEL",
-        RemoteKey: process.env.REMOTE_KEY,
+        RemoteKey: keyx,
       },
       json: true,
     },
@@ -114,9 +120,7 @@ if (typeof argv.port !== "number") {
           "Error: " + JSON.stringify(body) + JSON.stringify(error) + " error"
         );
       }
-      console.log("API Status Code: " + response.statusCode);
-      console.log(process.env.BizboxID);
-      console.log(process.env.RemoteKey);
+      console.log("Status Code: " + response.statusCode);
     }
   );
 
